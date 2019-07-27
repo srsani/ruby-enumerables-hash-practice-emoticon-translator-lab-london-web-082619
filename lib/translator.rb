@@ -6,7 +6,7 @@ def load_library (path)
   get_emoticon = {}
   for i,j in cnf
     get_meaning[j [1]] = i
-    get_emoticon[i] = j[1]
+    get_emoticon[j[0]] = j[1]
   end
   out_hash = {get_meaning:  get_meaning, get_emoticon:  get_emoticon }
 return out_hash
