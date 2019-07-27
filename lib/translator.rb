@@ -12,21 +12,13 @@ def load_library (path)
 return out_hash
 end
 
-def load_library_one (path)
-  require 'yaml'
-  cnf =  YAML.load_file(path)
-  cnf[:get_meaning] = [:get_meaning]
-  cnf[:get_emoticon] = [:get_emoticon]
-return cnf
-end
-
 def get_japanese_emoticon (path, emo)
-  cnf = load_library_one(path)
+  cnf = load_library(path)
   out_put = []
-  for i,j in cnf
-    if j.include?(emo)
-      out_put.append(j[1])
-      return j[1]
+  for i,j in cnf[:get_emoticon]
+    if i == emo
+      out_put.append(j)
+      return j
     end
   end
   if out_put ==[]
@@ -36,12 +28,12 @@ end
 
 
 def get_english_meaning (path, emo)
-  cnf = load_library_one(path)
+  cnf = load_library(path)
   out_put = []
-  for i,j in cnf
-    if j.include?(emo)
-      out_put.append(i)
-      return i
+  for i,j in cnf[:get_meaning]
+    if i == emo
+      out_put.append(j)
+      return j
     end
   end
   if out_put ==[]
