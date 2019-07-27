@@ -2,13 +2,26 @@
 def load_library (path)
   require 'yaml'
   cnf =  YAML.load_file(path)
+  get_meaning =  {}
+  get_emoticon = {}
+  for i,j in cnf
+    get_meaning[j [1]] = [i, j[0]]
+    get_emoticon[i] = j
+  end
+  out_hash = {get_meaning:  get_meaning, get_emoticon:  get_emoticon }
+return out_hash
+end
+
+def load_library_one (path)
+  require 'yaml'
+  cnf =  YAML.load_file(path)
   cnf[:get_meaning] = [:get_meaning]
   cnf[:get_emoticon] = [:get_emoticon]
 return cnf
 end
 
 def get_japanese_emoticon (path, emo)
-  cnf = load_library(path)
+  cnf = load_library_one(path)
   out_put = []
   for i,j in cnf
     if j.include?(emo)
@@ -23,7 +36,7 @@ end
 
 
 def get_english_meaning (path, emo)
-  cnf = load_library(path)
+  cnf = load_library_one(path)
   out_put = []
   for i,j in cnf
     if j.include?(emo)
